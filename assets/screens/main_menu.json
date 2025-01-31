@@ -1,0 +1,98 @@
+{
+    "screen_name": "main_menu",
+    "backgroud_image": null,
+    "title": null,
+    "contents": [
+        {
+            "RectangleContainer": {
+                "background_color": "#5b6d8a",
+                "padding": {
+                    "left": 5,
+                    "right": 5,
+                    "up": 5,
+                    "down": 5,
+                    "warning": "all these values are px"
+                },
+                "x_offset": 0,
+                "y_offset": 0,
+                "width_offset": 0.4,
+                "height_offset": 1,
+                "groups": [
+                    {
+                        "x_offset": 0.4,
+                        "y_offset": 0.35,
+                        "background_color": "#86f8fc",
+                        "backgroud_image": null,
+                        "text_weight": "bold",
+                        "text_size": 16,
+                        "font": "",
+                        "x_gap": 0,
+                        "y_gap": 0.06,
+                        "elements": [
+                            {
+                                "RectangleButton": {
+                                    "text": "PLAY",
+                                    "width_offset": 0.15,
+                                    "height_offset": 0.1
+                                }
+                            },
+                            {
+                                "RectangleButton": {
+                                    "text": "LOAD GAME",
+                                    "width_offset": 0.15,
+                                    "height_offset": 0.1
+                                }
+                            },
+                            {
+                                "RectangleButton": {
+                                    "text": "ABOUT",
+                                    "width_offset": 0.15,
+                                    "height_offset": 0.1
+                                }
+                            },
+                            {
+                                "RectangleButton": {
+                                    "text": "EXIT",
+                                    "width_offset": 0.15,
+                                    "height_offset": 0.1
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "background_color": null,
+                        "backgroud_image": null,
+                        "x_offset": 0.4,
+                        "y_offset": 0.70,
+                        "x_gap": 0.1,
+                        "y_gap": 0,
+                        "text_weight": "bold",
+                        "text_size": 16,
+                        "font": "",
+                        "elements": [
+                            {
+                                "CircleButton": {
+                                    "text": "",
+                                    "radius": 0.05,
+                                    "backgroud_image": {
+                                        "image": "assets/icons/question_mark.png",
+                                        "image2": null
+                                    }
+                                }
+                            },
+                            {
+                                "CircleButton": {
+                                    "radius": 0.05,
+                                    "backgroud_image": {
+                                        "image": "assets/icons/music.png",
+                                        "image2": "assets/icons/music_on.png"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
