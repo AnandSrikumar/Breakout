@@ -5,6 +5,8 @@ from pygame import image, transform, Surface
 
 from src.game_state_management import GameState
 from src.log_handle import get_logger
+from src.ui.containers import rectangle_builder
+
 logger = get_logger(__name__)
 
 """Module to build screen. Tried to keep this object as generic as possible, it can be used to build all the screens in the UI
@@ -17,27 +19,27 @@ There are few gui elements
     containers act as outer most elements, the coords are directly related to the main screen. ex: if the xcoord of 
     the container is 0.5 then it is placed at 50% location of the screen horizontally.
 
-2. children: We call them buttons, texts. We have 2 buttons
+2. children: We call them buttons, texts, userinputs. We have 2 buttons
     1. RectangleButton
     2. Circle button
     Buttons act as inner elements, their coords are calculated w.r.t to the container they are in. If button x coord is
     0.5 then we calculate the container (x,y,width, height) and then we do button_x =x + (width * 0.5)
 
-I tried to keep the UI design as simple as possible,  I predefined how my UIs would look like.
+I tried to keep the UI design as simple as possible yet became very complicated
+,  I predefined how my UIs would look like.
 
 """
 class ScreenUI:
     def __init__(self, 
-                 game_state: GameState,
-                 screen: Surface):
+                 game_state: GameState):
         self._game_state = game_state
-        self._screen = screen
+        self._screen = self._game_state.screen
     
-    def parse_screen_name(self, screen_name: str):
+    def set_screen_name(self, screen_name: str):
         self.screen_name = screen_name
         return self
     
-    def parse_backgroud_image(self, background_image: str):
+    def set_backgroud_image(self, background_image: str):
         if background_image:
             bg_image = image.load(background_image)
             bg_image = transform.scale(bg_image, 
@@ -48,16 +50,27 @@ class ScreenUI:
         self.background_image = None
         return self
     
-    def parse_contents(self, contents: list[dict]):
-        ...
+    def set_contents(self, contents: list[dict]):
+        self.containers = []
+        for content in contents:
+            match content:
+                case {"RectangleContainer": value}:
+                    self.containers.append(rectangle_builder(value, 
+                                                             self._game_state))
+
+                case {"CircleContainer": value}:
+                    ...
+                case _:
+                    logger.error(f"Error! Invalid container: {str(list(content.keys())[0])}")
+                    raise ValueError("Invalid container detected in configuration...")
 
 
 def parse_jsons() -> dict:
     """
     Iterates all the jsons in /assets/screens and returns the list of dictionaries (we read json as dictionary)
     """
-    path = "/assets/screens/"
-    screens = os.listdir("path")
+    path = "assets/screens/"
+    screens = os.listdir(path)
     all_screens = []
     for screen in screens:
         if not screen.endswith(".json"):
@@ -71,3 +84,19 @@ def build_ui(game_state: GameState):
     """We build the UI objects. We build individual components for the UI and add them in ui_components list
     UI_components list will be set up as instance variable of game_state object."""
     all_screens = parse_jsons()
+    screens = {}
+    for screen in all_screens:
+        screen_obj = ScreenUI(game_state)
+        screen_obj.set_backgroud_image(screen.get("background_image")).\
+                    set_screen_name(screen.get("screen_name")).\
+                    set_contents(screen.get("contents"))
+        screens[screen.get("screen_name")] = screen_obj
+    game_state.screen_uis = screens
+
+def draw_ui(game_state: GameState):
+    all_screens = game_state.screen_uis
+    for _, screen in all_screens.items():
+        for container in screen.containers:
+            container.draw(game_state)
+            for element in container.elements:
+                element.draw()

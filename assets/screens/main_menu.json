@@ -5,7 +5,7 @@
     "contents": [
         {
             "RectangleContainer": {
-                "background_color": "#5b6d8a",
+                "background_color": [91, 109, 138],
                 "padding": {
                     "left": 5,
                     "right": 5,
@@ -21,40 +21,40 @@
                     {
                         "x_offset": 0.4,
                         "y_offset": 0.35,
-                        "background_color": "#86f8fc",
-                        "backgroud_image": null,
+                        "background_color": [134, 248, 252],
                         "text_weight": "bold",
                         "text_size": 16,
                         "font": "",
                         "x_gap": 0,
-                        "y_gap": 0.06,
+                        "y_gap": 0.12,
+                        "hover": [55, 179, 184],
                         "elements": [
                             {
                                 "RectangleButton": {
                                     "text": "PLAY",
-                                    "width_offset": 0.15,
-                                    "height_offset": 0.1
+                                    "width_offset": 0.25,
+                                    "height_offset": 0.08
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "LOAD GAME",
-                                    "width_offset": 0.15,
-                                    "height_offset": 0.1
+                                   "width_offset": 0.25,
+                                    "height_offset": 0.08
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "ABOUT",
-                                    "width_offset": 0.15,
-                                    "height_offset": 0.1
+                                    "width_offset": 0.25,
+                                    "height_offset": 0.08
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "EXIT",
-                                    "width_offset": 0.15,
-                                    "height_offset": 0.1
+                                    "width_offset": 0.25,
+                                    "height_offset": 0.08
                                 }
                             }
                         ]
@@ -92,6 +92,15 @@
                         ]
                     }
                 ]
+            }
+        },
+        {
+            "RectangleContainer":{
+                "background_image": "assets/breakout_title.jpg",
+                "x_offset": 0.4,
+                "y_offset": 0,
+                "width_offset": 0.6,
+                "height_offset": 1
             }
         }
     ]
