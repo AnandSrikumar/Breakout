@@ -21,40 +21,41 @@
                     {
                         "x_offset": 0.4,
                         "y_offset": 0.35,
-                        "background_color": [134, 248, 252],
+                        "background_color": [55, 72, 82],
                         "text_weight": "bold",
-                        "text_size": 16,
-                        "font": "",
+                        "text_size": 28,
+                        "text_color": [255, 255, 180],
+                        "font": null,
                         "x_gap": 0,
-                        "y_gap": 0.12,
-                        "hover": [55, 179, 184],
+                        "y_gap": 0.11,
+                        "hover": [62, 90, 107],
                         "elements": [
                             {
                                 "RectangleButton": {
                                     "text": "PLAY",
                                     "width_offset": 0.25,
-                                    "height_offset": 0.08
+                                    "height_offset": 0.07
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "LOAD GAME",
                                    "width_offset": 0.25,
-                                    "height_offset": 0.08
+                                    "height_offset": 0.07
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "ABOUT",
                                     "width_offset": 0.25,
-                                    "height_offset": 0.08
+                                    "height_offset": 0.07
                                 }
                             },
                             {
                                 "RectangleButton": {
                                     "text": "EXIT",
                                     "width_offset": 0.25,
-                                    "height_offset": 0.08
+                                    "height_offset": 0.07
                                 }
                             }
                         ]
@@ -67,8 +68,9 @@
                         "x_gap": 0.1,
                         "y_gap": 0,
                         "text_weight": "bold",
-                        "text_size": 16,
-                        "font": "",
+                        "text_color": [0, 0, 0],
+                        "text_size": 48,
+                        "font": null,
                         "elements": [
                             {
                                 "CircleButton": {

@@ -1,3 +1,4 @@
+from typing import Any
 from pygame import Surface
 
 
@@ -10,6 +11,8 @@ class GameState:
     def __init__(self):
         self.running: bool = True
         self._screen: Surface | None = None
+        self.screens: dict[Any] = {}
+        self.current_screen: Any = None
 
     @property
     def screen(self) -> Surface:

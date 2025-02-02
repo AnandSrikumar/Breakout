@@ -12,6 +12,7 @@ class Button(ABC):
                     text_weight: str,
                     text_size: int,
                     font: str|None,
+                    text_color: tuple,
                     hover: tuple,
                     background_color: tuple,
                     game_state: GameState
@@ -20,12 +21,15 @@ class Button(ABC):
         self.text = text
         self.text_weight = text_weight
         self.text_size = text_size
-        self.font = font
+        self.font = pygame.font.Font(font, text_size)
+        self.font.set_bold(text_weight=="bold")
         self.hover = hover
         self.background_color = background_color
         self.game_state = game_state
         self.screen = self.game_state.screen
-        
+        self.text_color = text_color
+        self.coords_rect = pygame.Rect(*self.coords)
+
     @abstractmethod
     def draw(self):
         ...
@@ -33,6 +37,9 @@ class Button(ABC):
 class RectangleButton(Button):
     def draw(self):
         pygame.draw.rect(self.screen, self.background_color, self.coords, 0)
+        text_surface = self.font.render(self.text, True, self.text_color)
+        text_rect = text_surface.get_rect(center=self.coords_rect.center)
+        self.game_state.screen.blit(text_surface, text_rect)
 
 class CircleButton(Button):
     def draw(self):
@@ -62,6 +69,7 @@ def build_group(group: dict, game_state: GameState):
                                       group['text_weight'],
                                       group['text_size'],
                                       group['font'],
+                                      group.get("text_color", (255, 255, 255)),
                                       group.get('hover',group['background_color']),
                                       group['background_color'],
                                       game_state)

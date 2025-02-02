@@ -87,16 +87,20 @@ def build_ui(game_state: GameState):
     screens = {}
     for screen in all_screens:
         screen_obj = ScreenUI(game_state)
-        screen_obj.set_backgroud_image(screen.get("background_image")).\
+        screen_obj.set_screen_name(screen.get("screen_name")).\
+            set_backgroud_image(screen.get("background_image")).\
                     set_screen_name(screen.get("screen_name")).\
                     set_contents(screen.get("contents"))
         screens[screen.get("screen_name")] = screen_obj
     game_state.screen_uis = screens
+    game_state.current_screen = screens['main_menu']
+
+def handle_buttons(buttons):
+    for button in buttons:
+        button.draw()
 
 def draw_ui(game_state: GameState):
-    all_screens = game_state.screen_uis
-    for _, screen in all_screens.items():
-        for container in screen.containers:
-            container.draw(game_state)
-            for element in container.elements:
-                element.draw()
+    curr_screen = game_state.current_screen
+    for container in curr_screen.containers:
+        container.draw(game_state)
+        handle_buttons(container.elements)
