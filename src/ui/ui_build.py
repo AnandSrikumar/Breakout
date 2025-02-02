@@ -1,7 +1,7 @@
 import json
 import os
 
-from pygame import image, transform, Surface
+from pygame import Surface, image, transform
 
 from src.game_state_management import GameState
 from src.log_handle import get_logger
@@ -29,39 +29,42 @@ I tried to keep the UI design as simple as possible yet became very complicated
 ,  I predefined how my UIs would look like.
 
 """
+
+
 class ScreenUI:
-    def __init__(self, 
-                 game_state: GameState):
+    def __init__(self, game_state: GameState):
         self._game_state = game_state
         self._screen = self._game_state.screen
-    
+
     def set_screen_name(self, screen_name: str):
         self.screen_name = screen_name
         return self
-    
+
     def set_backgroud_image(self, background_image: str):
         if background_image:
             bg_image = image.load(background_image)
-            bg_image = transform.scale(bg_image, 
-                                       (self._game_state.screen_width, 
-                                        self._game_state.screen_height))
+            bg_image = transform.scale(
+                bg_image,
+                (self._game_state.screen_width, self._game_state.screen_height),
+            )
             self.background_image = bg_image
             return self
         self.background_image = None
         return self
-    
+
     def set_contents(self, contents: list[dict]):
         self.containers = []
         for content in contents:
             match content:
                 case {"RectangleContainer": value}:
-                    self.containers.append(rectangle_builder(value, 
-                                                             self._game_state))
+                    self.containers.append(rectangle_builder(value, self._game_state))
 
                 case {"CircleContainer": value}:
                     ...
                 case _:
-                    logger.error(f"Error! Invalid container: {str(list(content.keys())[0])}")
+                    logger.error(
+                        f"Error! Invalid container: {str(list(content.keys())[0])}"
+                    )
                     raise ValueError("Invalid container detected in configuration...")
 
 
@@ -80,6 +83,7 @@ def parse_jsons() -> dict:
             all_screens.append(screen_json)
     return all_screens
 
+
 def build_ui(game_state: GameState):
     """We build the UI objects. We build individual components for the UI and add them in ui_components list
     UI_components list will be set up as instance variable of game_state object."""
@@ -87,19 +91,24 @@ def build_ui(game_state: GameState):
     screens = {}
     for screen in all_screens:
         screen_obj = ScreenUI(game_state)
-        screen_obj.set_screen_name(screen.get("screen_name")).\
-            set_backgroud_image(screen.get("background_image")).\
-                    set_screen_name(screen.get("screen_name")).\
-                    set_contents(screen.get("contents"))
+        screen_obj.set_screen_name(screen.get("screen_name")).set_backgroud_image(
+            screen.get("background_image")
+        ).set_screen_name(screen.get("screen_name")).set_contents(
+            screen.get("contents")
+        )
         screens[screen.get("screen_name")] = screen_obj
     game_state.screen_uis = screens
-    game_state.current_screen = screens['main_menu']
+    game_state.current_screen = screens["main_menu"]
+
 
 def handle_buttons(buttons):
+    """This is to handle button hover, clicks and draw"""
     for button in buttons:
         button.draw()
 
+
 def draw_ui(game_state: GameState):
+    """Draws the screen containers and buttons, it will only draw current screen"""
     curr_screen = game_state.current_screen
     for container in curr_screen.containers:
         container.draw(game_state)

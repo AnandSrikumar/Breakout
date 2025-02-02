@@ -9,6 +9,8 @@ This module contains the class GameRunner, this class has the method that starts
 This is the entry point where pygame is initialized and all the required game objects are created.
 The gameloop updates the state and runs 60 times a second.
 """
+
+
 class GameRunner:
     def __init__(self):
         self._game_state = GameState()
@@ -18,13 +20,12 @@ class GameRunner:
         pygame.display.set_caption("Breakout")
         self._game_state.screen = self._screen
         build_ui(self._game_state)
-        
 
     def event_loop(self):
         """Iterates the events and calls handle_events method"""
         for event in pygame.event.get():
             self._event_handler.handle_events(event)
-    
+
     def game_loop(self):
         """The main game loop."""
         while self._game_state.running:
@@ -32,5 +33,5 @@ class GameRunner:
             self._screen.fill((0, 0, 0))
             draw_ui(game_state=self._game_state)
             pygame.display.flip()
-    pygame.quit()
 
+    pygame.quit()

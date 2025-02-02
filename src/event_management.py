@@ -5,6 +5,7 @@ from src.game_state_management import GameState
 """Module created to handle events more efficiently. To keep the code clean, the event handling
 is delegated to a different module and a class. We harness match/case for better readability and pattern matching."""
 
+
 class EventHandler:
     def __init__(self, game_state: GameState):
         """game_state is an object that has all the global variables"""
@@ -27,7 +28,7 @@ class EventHandler:
     def mouse_down(self):
         """Handles mouse down events"""
         ...
-    
+
     def mouse_up(self):
         """Handles mouse up events"""
         ...
@@ -35,10 +36,10 @@ class EventHandler:
     def custom_event(self):
         """Handle custom events. These events are needed because we have to run some tasks with some delay
         and don't want to block the main loop. Custom events are very useful to perform some operation every few seconds.
-        ex: 
+        ex:
         CUSTOM_EVENT = pygame.USEREVENT + 1  # Create a unique event ID
-        pygame.time.set_timer(CUSTOM_EVENT, 2000) 
-        
+        pygame.time.set_timer(CUSTOM_EVENT, 2000)
+
         The above custom event runs every 2 seconds, we can perform some task when that happens.
         This method is very complicated compared to all the other event handling methods.
         """
