@@ -35,6 +35,7 @@ class Button(ABC):
         self.font.set_bold(text_weight == "bold")
         self.hover = hover
         self.background_color = background_color
+        self.original_color = background_color
         self.game_state = game_state
         self.screen = self.game_state.screen
         self.text_color = text_color

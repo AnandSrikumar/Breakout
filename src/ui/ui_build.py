@@ -98,18 +98,4 @@ def build_ui(game_state: GameState):
         )
         screens[screen.get("screen_name")] = screen_obj
     game_state.screen_uis = screens
-    game_state.current_screen = screens["main_menu"]
-
-
-def handle_buttons(buttons):
-    """This is to handle button hover, clicks and draw"""
-    for button in buttons:
-        button.draw()
-
-
-def draw_ui(game_state: GameState):
-    """Draws the screen containers and buttons, it will only draw current screen"""
-    curr_screen = game_state.current_screen
-    for container in curr_screen.containers:
-        container.draw(game_state)
-        handle_buttons(container.elements)
+    game_state.current_screen = "main_menu"

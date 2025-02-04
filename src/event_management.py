@@ -1,6 +1,9 @@
 import pygame
 
 from src.game_state_management import GameState
+from src.log_handle import get_logger
+
+logger = get_logger(__name__)
 
 """Module created to handle events more efficiently. To keep the code clean, the event handling
 is delegated to a different module and a class. We harness match/case for better readability and pattern matching."""
@@ -20,10 +23,28 @@ class EventHandler:
         match event.key:
             case pygame.K_q:
                 self._game_state.running = False
+            case pygame.K_UP:
+                self._game_state.up_pressed = True
+                self._game_state.down_pressed = False
+            case pygame.K_DOWN:
+                self._game_state.down_pressed = True
+                self._game_state.up_pressed = False
+            case pygame.K_RETURN:
+                self._game_state.enter_pressed = True
+            case pygame.K_SPACE:
+                self._game_state.space_pressed = True
 
     def key_up(self, event):
         """Handles key up events"""
-        ...
+        match event.key:
+            case pygame.K_UP:
+                self._game_state.up_pressed = False
+            case pygame.K_DOWN:
+                self._game_state.down_pressed = False
+            case pygame.K_RETURN:
+                self._game_state.enter_pressed = False
+            case pygame.K_SPACE:
+                self._game_state.space_pressed = False
 
     def mouse_down(self):
         """Handles mouse down events"""

@@ -11,10 +11,20 @@ class GameState:
     """Maintains a global state"""
 
     def __init__(self):
+        self.FPS: int = 60
+        self.dt: int = 0
         self.running: bool = True
+        self.sound_manager = None
         self._screen: Surface | None = None
-        self.screens: dict[Any] = {}
+        self.screen_uis: dict[Any] = {}
         self.current_screen: Any = None
+        self.mouse_pos: tuple = None
+        self.main_menu_handle: Any = None
+        self.up_pressed: bool = False
+        self.down_pressed: bool = False
+        self.mouse_down = False
+        self.enter_pressed = False
+        self.space_pressed = False
 
     @property
     def screen(self) -> Surface:
