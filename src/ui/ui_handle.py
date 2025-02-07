@@ -36,7 +36,7 @@ class MainMenu():
             return
         _, mouse_y = mouse_pos
         if mouse_y >= button.coords[1] and \
-                  mouse_y < button.coords[1] + button.coords[3]:
+                  mouse_y < button.coords[1] + button.coords[-1]:
                 self.current_focus = idx
                 # self.game_state.sound_manager.play_sound("button_hover")
 

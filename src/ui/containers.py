@@ -4,10 +4,13 @@ import pygame
 
 from src.game_state_management import GameState
 from src.ui.elements import build_group
+from src.utils import draw_utils
 
 """The module dedicated to build containers. Containers are sections within a screen. 
 Containers can be of Rectangle and circle. They can be placed anywhere on the screen. We calculate their locations with offsets
 ex: if container's x is 0.5 then its x is located at 50% of the screen.
+
+Ooops, I mislabelled margin as padding.
 """
 
 
@@ -29,15 +32,7 @@ class BaseContainer:
 
 class CircleContainer(BaseContainer):
     def set_background_image(self, img: str | None):
-        img = pygame.image.load(self.background_image).convert_alpha()
-        img = pygame.transform.scale(img, (self.radius * 2, self.radius * 2))
-
-        mask = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
-        pygame.draw.circle(
-            mask, (255, 255, 255, 255), (self.radius, self.radius), self.radius
-        )
-
-        img.blit(mask, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
+        img = draw_utils.set_circle_background(img, self.radius)
         self.background_image = img
 
     def set_size(self, radius_offset: float, screen_width: float):
@@ -72,10 +67,7 @@ class RectangleContainer(BaseContainer):
         if not img:
             self.background_image = None
             return self
-        background_image = pygame.image.load(img)
-        background_image = pygame.transform.scale(
-            background_image, (self.width, self.height)
-        )
+        background_image = draw_utils.set_rect_background(img, self.width, self.height)
         self.background_image = background_image
         return self
 

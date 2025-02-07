@@ -48,11 +48,11 @@ class EventHandler:
 
     def mouse_down(self):
         """Handles mouse down events"""
-        ...
+        self._game_state.mouse_down = True
 
     def mouse_up(self):
         """Handles mouse up events"""
-        ...
+        self._game_state.mouse_down = False
 
     def custom_event(self):
         """Handle custom events. These events are needed because we have to run some tasks with some delay
@@ -74,5 +74,14 @@ class EventHandler:
                 return True
             case pygame.KEYDOWN:
                 self.key_down(event)
+                return True
+            case pygame.KEYUP:
+                self.key_up(event)
+                return True
+            case pygame.MOUSEBUTTONDOWN:
+                self.mouse_down()
+                return True
+            case pygame.MOUSEBUTTONDOWN:
+                self.mouse_up()
                 return True
         return False

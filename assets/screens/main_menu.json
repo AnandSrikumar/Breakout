@@ -61,10 +61,10 @@
                         ]
                     },
                     {
-                        "background_color": null,
+                        "background_color": [0, 0, 0],
                         "backgroud_image": null,
-                        "x_offset": 0.4,
-                        "y_offset": 0.70,
+                        "x_offset": 0.45,
+                        "y_offset": 0.81,
                         "x_gap": 0.1,
                         "y_gap": 0,
                         "text_weight": "bold",
@@ -72,25 +72,7 @@
                         "text_size": 48,
                         "font": null,
                         "elements": [
-                            {
-                                "CircleButton": {
-                                    "text": "",
-                                    "radius": 0.05,
-                                    "backgroud_image": {
-                                        "image": "assets/icons/question_mark.png",
-                                        "image2": null
-                                    }
-                                }
-                            },
-                            {
-                                "CircleButton": {
-                                    "radius": 0.05,
-                                    "backgroud_image": {
-                                        "image": "assets/icons/music.png",
-                                        "image2": "assets/icons/music_on.png"
-                                    }
-                                }
-                            }
+                            
                         ]
                     }
                 ]
