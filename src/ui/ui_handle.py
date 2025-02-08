@@ -2,6 +2,7 @@ from typing import Any
 from src.game_state_management import GameState
 from src.ui.elements import Button, RectangleButton
 from src.log_handle import get_logger
+from src.utils.sound_utils import change_background_music
 
 logger = get_logger(__name__)
 
@@ -64,6 +65,9 @@ class MainMenu():
         match text:
             case "EXIT":
                 self.game_state.running = False
+            case "PLAY":
+                self.game_state.current_screen = "game"
+                change_background_music("crimson_fly", self.game_state)
 
     def handle_buttons(self, buttons: list[Button]):
         """We do everything with this method. We call hover check methods, button functionality method, etc"""
@@ -81,6 +85,13 @@ class MainMenu():
             return
         hover_text = buttons[self.current_focus].text
         self.button_functionality(hover_text)
+    
+    def handle_main_menu(self, buttons: list[Button]):
+        self.handle_buttons(buttons)
+
+class GameScreen:
+    def __init__(self, game_state: GameState):
+        self.game_state = game_state
 
     
 def initialize_ui_handles(game_state: GameState):
@@ -89,14 +100,20 @@ def initialize_ui_handles(game_state: GameState):
     We initialize objects for each one of the screen and store it in game state instance variable
     """
     game_state.main_menu_handle = MainMenu(game_state)
+    game_state.game_handle = GameScreen(game_state)
 
-def get_handle(game_state: GameState) -> Any:
+def handle_ui(game_state: GameState, 
+              container: Any, 
+              screen_name:str) -> Any:
     """Game state has a current_screen object, that points to the screen that should be rendered. 
     We check the current screen and return the appropriate screen object"""
-    screen_name = game_state.current_screen
     match screen_name:
         case "main_menu":
-            return game_state.main_menu_handle
+            handler = game_state.main_menu_handle
+            handler.handle_main_menu(container.elements)
+            return
+        case "game":
+            handler = game_state.game_handle
             
 def draw_ui(game_state: GameState):
     """Draws the screen containers and buttons, it will only draw current screen"""
@@ -104,5 +121,4 @@ def draw_ui(game_state: GameState):
     curr_screen = game_state.screen_uis[curr_screen_name]
     for container in curr_screen.containers:
         container.draw(game_state)
-        button_handler = get_handle(game_state)
-        button_handler.handle_buttons(container.elements)
+        handle_ui(game_state, container, curr_screen_name)

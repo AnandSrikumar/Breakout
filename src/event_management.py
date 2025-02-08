@@ -33,6 +33,8 @@ class EventHandler:
                 self._game_state.enter_pressed = True
             case pygame.K_SPACE:
                 self._game_state.space_pressed = True
+            case pygame.K_BACKSPACE:
+                self._game_state.current_screen="main_menu"
 
     def key_up(self, event):
         """Handles key up events"""
@@ -81,7 +83,7 @@ class EventHandler:
             case pygame.MOUSEBUTTONDOWN:
                 self.mouse_down()
                 return True
-            case pygame.MOUSEBUTTONDOWN:
+            case pygame.MOUSEBUTTONUP:
                 self.mouse_up()
                 return True
         return False

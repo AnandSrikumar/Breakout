@@ -1,0 +1,19 @@
+{
+    "screen_name": "game",
+    "background": null,
+    "contents": [
+        {
+            "RectangleContainer": {
+                "background_color": [
+                    91,
+                    109,
+                    138
+                ],
+                "x_offset": 0,
+                "y_offset": 0.05,
+                "width_offset": 1,
+                "height_offset": 0.95
+            }
+        }
+    ]
+}
