@@ -1,8 +1,8 @@
 from typing import Any
 from src.game_state_management import GameState
-from src.ui.elements import Button, RectangleButton
+from src.ui.elements import Button
 from src.log_handle import get_logger
-from src.utils.sound_utils import change_background_music
+from src.level_handler import LevelManager
 
 logger = get_logger(__name__)
 
@@ -67,7 +67,7 @@ class MainMenu():
                 self.game_state.running = False
             case "PLAY":
                 self.game_state.current_screen = "game"
-                change_background_music("crimson_fly", self.game_state)
+                self.game_state.game_handle.load_game_screen()
 
     def handle_buttons(self, buttons: list[Button]):
         """We do everything with this method. We call hover check methods, button functionality method, etc"""
@@ -93,7 +93,10 @@ class GameScreen:
     def __init__(self, game_state: GameState):
         self.game_state = game_state
 
-    
+    def load_game_screen(self):
+        self.level = LevelManager(game_state=self.game_state)
+        self.level.load_level()
+
 def initialize_ui_handles(game_state: GameState):
     """
     We might have multiple screens and each screen will have a class to handle the ui.

@@ -39,7 +39,9 @@ class SoundManager:
 
     def play_music(self, loop=True, start_time=49):
         """Plays background music using pygame.mixer.music"""
-        music_path = f"assets/sounds/{self.background_music}.mp3"
+        music_path = f"assets/sounds/{self.background_music}"
+        if "." not in self.background_music:
+            music_path = f"assets/sounds/{self.background_music}.mp3"
         try:
             pygame.mixer.music.load(music_path)
             pygame.mixer.music.set_volume(0.7)

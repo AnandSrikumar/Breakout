@@ -1,13 +1,16 @@
 {
     "matrix":[
         ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
-        ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
+        ["purple", "purple", "purple", "purple", "purple", "purple", "purple", "purple", "purple", "purple"],
         ["dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green"],
         ["dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue"]
     ],
     "num_powers": 10,
     "num_cols": 10,
     "num_rows": 4,
-    "background_music":"assets/sounds/crimson_fly.mp3",
-    "background_image": "assets/backgrounds/space1.jpg"
+    "double_hit_tiles": [],
+    "background_music":"crimson_fly.mp3",
+    "background_image": "assets/backgrounds/space1.jpg",
+    "tiles_offsets": {"x": 0.15, "y": 0.18},
+    "tiles_dims": {"width": 0.07, "height": 0.045}
 }

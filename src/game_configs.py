@@ -14,5 +14,14 @@ def map_files_list(path):
 TILES_DICT = map_files_list(TILES_PATH)
 LEVELS_DICT = map_files_list(LEVELS_PATH)
 
+BULLETS_BAT = ["assets/tiles/bats/bullets.png", 
+               'assets/tiles/bats/bullets2.png',
+               "assets/tiles/bats/bullets3.png"]
+
+MAGNET_BAT = ["assets/tiles/bats/magnet.png"]
+NORMAL_BAT = ["assets/tiles/bats/normal1.png",
+              "assets/tiles/bats/normal2.png",
+              "assets/tiles/bats/normal3.png"]
+
 
 

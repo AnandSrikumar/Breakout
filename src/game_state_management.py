@@ -1,6 +1,7 @@
 from typing import Any
 
 from pygame import Surface
+from pygame.sprite import Group
 
 """This module contains a class named GameState, this object is very useful because it maintains global variables.
 We created this so that we need not to pass too many values to constructor of different objects.
@@ -25,6 +26,9 @@ class GameState:
         self.mouse_down = False
         self.enter_pressed = False
         self.space_pressed = False
+        self.tiles_group = Group()
+        self.bat_sprite = None
+        self.level = 1
 
     @property
     def screen(self) -> Surface:

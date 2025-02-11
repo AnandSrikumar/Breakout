@@ -56,18 +56,6 @@ class EventHandler:
         """Handles mouse up events"""
         self._game_state.mouse_down = False
 
-    def custom_event(self):
-        """Handle custom events. These events are needed because we have to run some tasks with some delay
-        and don't want to block the main loop. Custom events are very useful to perform some operation every few seconds.
-        ex:
-        CUSTOM_EVENT = pygame.USEREVENT + 1  # Create a unique event ID
-        pygame.time.set_timer(CUSTOM_EVENT, 2000)
-
-        The above custom event runs every 2 seconds, we can perform some task when that happens.
-        This method is very complicated compared to all the other event handling methods.
-        """
-        ...
-
     def handle_events(self, event: pygame.event) -> bool:
         """takes event and Uses match/case to call the method that handles the specific event."""
         match event.type:

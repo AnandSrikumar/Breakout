@@ -34,6 +34,16 @@ class GameRunner:
     def calculate_mouse_pos(self):
         self._game_state.mouse_pos = pygame.mouse.get_pos()
 
+    def update_sprite_groups(self):
+        def update_and_draw(group, **kwargs):
+            if group is None:
+                return
+            group.update(**kwargs)
+            group.draw(self._screen)
+        
+        update_and_draw(self._game_state.tiles_group)
+        update_and_draw(self._game_state.bat_sprite, dt=0)
+
     def game_loop(self):
         """The main game loop."""
         clock = pygame.time.Clock()
@@ -42,6 +52,7 @@ class GameRunner:
             self._screen.fill((0, 0, 0))
             self.calculate_mouse_pos()
             draw_ui(game_state=self._game_state)
+            self.update_sprite_groups()
             pygame.display.flip()
             self._game_state.dt = clock.tick(self._game_state.FPS)
 
