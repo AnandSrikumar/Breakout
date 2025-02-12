@@ -3,7 +3,7 @@ import random
 
 from src.game_state_management import GameState
 from src.sprite_engine.tiles import Tile
-from src.sprite_engine.player import Bat
+from src.sprite_engine.player import Ball, Bat
 from src.utils.sound_utils import change_background_music
 
 class LevelManager:
@@ -32,7 +32,9 @@ class LevelManager:
         self.tile_width = level_json['tiles_dims']['width']
         self.tile_height = level_json['tiles_dims']['height']
         self.bat_placement = level_json.get("bat_placement", (0.45, 0.93))
+        self.ball_placement = level_json.get("ball_placement", (0.5, 0.92))
         self.bat_dims = level_json.get("bat_dims", (0.09, 0.025))
+        self.ball_dims = level_json.get("ball_dims", (0.009, 0.009))
 
     def initialize_random_powers(self):
         """We have several powers that will be assigned to random matrix cells. Not implemented yet.
@@ -59,13 +61,23 @@ class LevelManager:
             curr_x = start_x
             curr_y += h
 
+    def __load_player(self, placement, dims):
+        x = placement[0] * self.game_state.screen_width
+        y = placement[1] * self.game_state.screen_height
+        w = dims[0] * self.game_state.screen_width
+        h = dims[1] * self.game_state.screen_height
+        return (x, y, w, h)
+
     def load_bat(self):
-        bat_x = self.bat_placement[0] * self.game_state.screen_width
-        bat_y = self.bat_placement[1] * self.game_state.screen_height
-        w = self.bat_dims[0] * self.game_state.screen_width
-        h = self.bat_dims[1] * self.game_state.screen_height
-        bat = Bat((bat_x, bat_y, w, h), self.game_state)
+        coords = self.__load_player(self.bat_placement, self.bat_dims)
+        bat = Bat(coords, self.game_state)
         self.game_state.bat_sprite = bat
+    
+    def load_ball(self):
+        coords = self.__load_player(self.ball_placement, self.ball_dims)
+        coords = (coords[0], coords[1], coords[2])
+        ball = Ball(coords, self.game_state)
+        self.game_state.ball_sprite = ball
 
     def load_level(self):
         level_json = self.load_json()
@@ -75,3 +87,4 @@ class LevelManager:
         self.game_state.screen_uis['game'].containers[0].set_background_image(self.background_image)
         self.load_tiles()
         self.load_bat()
+        self.load_ball()

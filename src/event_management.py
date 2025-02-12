@@ -29,6 +29,10 @@ class EventHandler:
             case pygame.K_DOWN:
                 self._game_state.down_pressed = True
                 self._game_state.up_pressed = False
+            case pygame.K_LEFT:
+                self._game_state.left_pressed = True
+            case pygame.K_RIGHT:
+                self._game_state.right_pressed = True
             case pygame.K_RETURN:
                 self._game_state.enter_pressed = True
             case pygame.K_SPACE:
@@ -45,6 +49,10 @@ class EventHandler:
                 self._game_state.down_pressed = False
             case pygame.K_RETURN:
                 self._game_state.enter_pressed = False
+            case pygame.K_LEFT:
+                self._game_state.left_pressed = False
+            case pygame.K_RIGHT:
+                self._game_state.right_pressed = False
             case pygame.K_SPACE:
                 self._game_state.space_pressed = False
 

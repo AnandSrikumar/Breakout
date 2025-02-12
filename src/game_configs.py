@@ -2,6 +2,7 @@ import os
 
 TILES_PATH = "assets/tiles/tile_sprites/"
 LEVELS_PATH = "assets/levels/"
+BALL_PATH = "assets/Ball.png"
 
 def map_files_list(path):
     item_dict = {}
@@ -23,5 +24,5 @@ NORMAL_BAT = ["assets/tiles/bats/normal1.png",
               "assets/tiles/bats/normal2.png",
               "assets/tiles/bats/normal3.png"]
 
-
+BAT_MOVEMENT_SPEED = 550
 

@@ -28,7 +28,7 @@ class Tile(pygame.sprite.Sprite):
             if broken:
                 path += "_broken"
             path += ".png"
-            image = pygame.image.load(path)
+            image = pygame.image.load(path).convert_alpha()
             image = pygame.transform.scale(image, 
                                             (self.coords[2], self.coords[3]))
             return image

@@ -84,13 +84,6 @@ class CircleButton(Button):
     
     def draw(self):
         """Draw implementation for circle"""
-        # pygame.draw.circle(
-        #     self.screen, self.background_color, self.coords[0:2], self.coords[2]
-        # )
-        # if not self.background_image_obj:
-        #     self.background_image_obj = self.draw_background_image()
-        # else:
-        #     self.screen.blit(self.background_image_obj, self.coords_rect)
 
 
 def rectangle_build(group: dict, 
