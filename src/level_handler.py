@@ -3,7 +3,8 @@ import random
 
 from src.game_state_management import GameState
 from src.sprite_engine.tiles import Tile
-from src.sprite_engine.player import Ball, Bat
+from src.sprite_engine.player import Bat
+from src.sprite_engine.ball import Ball
 from src.utils.sound_utils import change_background_music
 
 class LevelManager:
@@ -34,7 +35,7 @@ class LevelManager:
         self.bat_placement = level_json.get("bat_placement", (0.45, 0.93))
         self.ball_placement = level_json.get("ball_placement", (0.5, 0.92))
         self.bat_dims = level_json.get("bat_dims", (0.09, 0.025))
-        self.ball_dims = level_json.get("ball_dims", (0.009, 0.009))
+        self.ball_dims = level_json.get("ball_dims", (0.008, 0.008))
 
     def initialize_random_powers(self):
         """We have several powers that will be assigned to random matrix cells. Not implemented yet.
@@ -77,7 +78,7 @@ class LevelManager:
         coords = self.__load_player(self.ball_placement, self.ball_dims)
         coords = (coords[0], coords[1], coords[2])
         ball = Ball(coords, self.game_state)
-        self.game_state.ball_sprite = ball
+        self.game_state.ball_sprite_group.add(ball)
 
     def load_level(self):
         level_json = self.load_json()

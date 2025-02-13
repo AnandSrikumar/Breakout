@@ -1,3 +1,4 @@
+import math
 import os
 
 TILES_PATH = "assets/tiles/tile_sprites/"
@@ -24,5 +25,6 @@ NORMAL_BAT = ["assets/tiles/bats/normal1.png",
               "assets/tiles/bats/normal2.png",
               "assets/tiles/bats/normal3.png"]
 
-BAT_MOVEMENT_SPEED = 550
-
+BAT_MOVEMENT_SPEED = 590
+BALL_SPEED = 12
+MAX_ANGLE = math.radians(60)

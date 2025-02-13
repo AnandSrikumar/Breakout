@@ -5,7 +5,6 @@ from src.game_state_management import GameState
 from src.ui.ui_build import build_ui
 from src.ui.ui_handle import draw_ui, initialize_ui_handles
 from src.sound_manager import SoundManager
-from src.utils.game_profiling import draw_performance_overlay
 from src.log_handle import get_logger
 
 logger = get_logger(__name__)
@@ -49,7 +48,7 @@ class GameRunner:
         
         update_and_draw(self._game_state.tiles_group)
         update_and_draw(self._game_state.bat_sprite, dt=dt)
-        update_and_draw(self._game_state.ball_sprite, dt=dt)
+        update_and_draw(self._game_state.ball_sprite_group, dt=dt)
 
     def game_loop(self):
         """The main game loop."""
@@ -60,7 +59,6 @@ class GameRunner:
             self._screen.fill((0, 0, 0))
             self.calculate_mouse_pos()
             draw_ui(game_state=self._game_state)
-            # draw_performance_overlay(self._screen, self._font, clock)
             self.update_sprite_groups(dt)
             pygame.display.update()
             

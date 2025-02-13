@@ -46,7 +46,6 @@ class MainMenu():
         """We handle up and down button presses, based on the up and down, we move the hover focus up and down.
         If current focus is out of bounds, we bring them to the bounds (if x>len(matrix) 
         then x=0, if x < 0 then x = len(matrix) -1)"""
-        logger.info("Mouse unmoved. Checking key hover")
         if self.game_state.up_pressed:
             logger.info("Up button pressed")
             self.game_state.up_pressed = False

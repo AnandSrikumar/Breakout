@@ -31,7 +31,7 @@ class GameState:
         self.space_pressed = False
         self.tiles_group = Group()
         self.bat_sprite = None
-        self.ball_sprite = None
+        self.ball_sprite_group = Group()
         self.level = 1
         self.space = pymunk.Space()
 

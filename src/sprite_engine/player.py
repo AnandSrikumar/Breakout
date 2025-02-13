@@ -71,30 +71,3 @@ class Bat(pygame.sprite.Sprite):
 
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect)
-
-
-class Ball(pygame.sprite.Sprite):
-    def __init__(self,
-                 coords: tuple,
-                 game_state: GameState):
-        self.game_state = game_state
-        self.coords = coords
-        self.is_fireball = False
-        self.load_frame()
-        
-    def load_frame(self):
-        dims = (self.coords[2] * 2, self.coords[2] * 2)
-        BALL_RADIUS = self.coords[2]
-        image = pygame.image.load(BALL_PATH).convert_alpha()
-        image = pygame.transform.smoothscale(image, dims)
-        mask_surface = pygame.Surface(dims, pygame.SRCALPHA)
-        pygame.draw.circle(mask_surface, (255, 255, 255, 255), (BALL_RADIUS, BALL_RADIUS), BALL_RADIUS) 
-        image.blit(mask_surface, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
-        self.rect = image.get_rect(center=(self.coords[0], self.coords[1]))
-        self.image = image
-    
-    def update(self, dt: float|int):
-        ...
-    
-    def draw(self, screen: pygame.Surface):
-        screen.blit(self.image, self.rect)
