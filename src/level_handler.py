@@ -35,7 +35,7 @@ class LevelManager:
         self.bat_placement = level_json.get("bat_placement", (0.45, 0.93))
         self.ball_placement = level_json.get("ball_placement", (0.5, 0.92))
         self.bat_dims = level_json.get("bat_dims", (0.09, 0.025))
-        self.ball_dims = level_json.get("ball_dims", (0.008, 0.008))
+        self.ball_dims = level_json.get("ball_dims", (0.007, 0.007))
 
     def initialize_random_powers(self):
         """We have several powers that will be assigned to random matrix cells. Not implemented yet.
@@ -58,9 +58,9 @@ class LevelManager:
                 is_double_hit = (idx, idx2) in self.double_hit_tiles
                 tile = Tile(cell, coords, self.game_state, is_double_hit)
                 self.game_state.tiles_group.add(tile)
-                curr_x += w
+                curr_x += w + w*0.08
             curr_x = start_x
-            curr_y += h
+            curr_y += h + h*0.08
 
     def __load_player(self, placement, dims):
         x = placement[0] * self.game_state.screen_width
