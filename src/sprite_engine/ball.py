@@ -48,6 +48,7 @@ class Ball(pygame.sprite.Sprite):
         pygame.draw.circle(mask_surface, (255, 255, 255, 255), (BALL_RADIUS, BALL_RADIUS), BALL_RADIUS) 
         image.blit(mask_surface, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
         self.rect = image.get_rect(center=(self.coords[0], self.coords[1]))
+        self.prev_rect = self.rect.copy()
         self.image = image
 
     def modify_sticky(self):
@@ -75,12 +76,31 @@ class Ball(pygame.sprite.Sprite):
             return
         hit_pos = (self.rect.centerx - bat_rect.centerx) / (bat_rect.w / 2)
         self.velocity.angle_modify(hit_pos=hit_pos)
-
+    
     def tiles_collision(self):
-        collided_bricks = pygame.sprite.spritecollide(self, self.game_state.tiles_group, dokill=True)
+        collided_bricks = pygame.sprite.spritecollide(self, self.game_state.tiles_group, dokill=False)
         if not collided_bricks:
             return  
-        self.velocity.y *= -1
+        
+        brick = collided_bricks[0]
+        brick.hits_to_break -= 1
+        self.game_state.sound_manager.play_sound("brick_hit")
+        if self.prev_rect.right <= brick.rect.left:
+            self.velocity.x *= -1
+        elif self.prev_rect.left >= brick.rect.right:
+            self.velocity.x *= -1
+        elif self.prev_rect.bottom <= brick.rect.top:
+            self.velocity.y *= -1
+        elif self.prev_rect.top >= brick.rect.bottom:
+            self.velocity.y *= -1
+
+    def wall_collision(self):
+        if self.rect.colliderect(self.game_state.walls['left']) or \
+                self.rect.colliderect(self.game_state.walls['right']):
+            self.velocity.x *= -1
+            return
+        if self.rect.colliderect(self.game_state.walls['top']):
+            self.velocity.y *= -1
 
     def move_ball(self, dt):
         bat = self.game_state.bat_sprite
@@ -89,6 +109,7 @@ class Ball(pygame.sprite.Sprite):
         if self.is_sticky:
             self.sticky_movement((bat_x, bat_y, bat_w, bat_h))
             return
+        self.prev_rect = self.rect.copy()
         self.rect.x += self.velocity.x
         self.rect.y += self.velocity.y
 
@@ -96,6 +117,14 @@ class Ball(pygame.sprite.Sprite):
         if self.game_state.space_pressed:
             self.is_sticky = False
     
+    def check_ball_dead(self):
+        if self.rect.y >= self.game_state.screen_height:
+            self.kill()
+
+    def debug_draw(self):
+        pygame.draw.rect(self.game_state.screen,
+                         (255, 0, 0), self.rect, 1)
+
     def update(self, dt: float|int):
         self.modify_sticky()
         self.move_ball(dt)
@@ -103,6 +132,7 @@ class Ball(pygame.sprite.Sprite):
         self.paddle_collision_check()
         self.key_bindings()
         self.tiles_collision()
+        self.check_ball_dead()
     
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect)

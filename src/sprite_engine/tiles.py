@@ -40,7 +40,8 @@ class Tile(pygame.sprite.Sprite):
         self.rect.topleft = (self.coords[0], self.coords[1])
 
     def update(self):
-        ...
+        if self.hits_to_break < 1:
+            self.kill()
     
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect)

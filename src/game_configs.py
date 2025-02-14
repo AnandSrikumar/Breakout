@@ -25,6 +25,6 @@ NORMAL_BAT = ["assets/tiles/bats/normal1.png",
               "assets/tiles/bats/normal2.png",
               "assets/tiles/bats/normal3.png"]
 
-BAT_MOVEMENT_SPEED = 590
+BAT_MOVEMENT_SPEED = 660
 BALL_SPEED = 12
 MAX_ANGLE = math.radians(60)

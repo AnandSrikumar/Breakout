@@ -1,5 +1,6 @@
 import json
 import random
+from pygame.rect import Rect
 
 from src.game_state_management import GameState
 from src.sprite_engine.tiles import Tile
@@ -80,12 +81,30 @@ class LevelManager:
         ball = Ball(coords, self.game_state)
         self.game_state.ball_sprite_group.add(ball)
 
+    def load_side_walls(self):
+        self.game_state.walls['left'] = Rect(0, 0, 
+             self.game_state.screen_width*0.02, 
+             self.game_state.screen_height)
+        
+        self.game_state.walls['right'] = Rect(self.game_state.screen_width*0.98, 0, 
+             self.game_state.screen_width*0.02, 
+             self.game_state.screen_height)
+        
+        self.game_state.walls['top'] = Rect(0, 0, 
+             self.game_state.screen_width, 
+             self.game_state.screen_height*0.02)
+        
+    def reset_bat_ball(self):
+        self.load_bat()
+        self.load_ball()
+
     def load_level(self):
         level_json = self.load_json()
         self.build_level_json(level_json)
         change_background_music(self.background_music, 
-                                game_state=self.game_state)
+                                game_state=self.game_state, volume=0.5)
         self.game_state.screen_uis['game'].containers[0].set_background_image(self.background_image)
         self.load_tiles()
         self.load_bat()
         self.load_ball()
+        self.load_side_walls()

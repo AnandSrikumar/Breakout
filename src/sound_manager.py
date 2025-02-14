@@ -10,6 +10,7 @@ class SoundManager:
         self.sounds = {}
         sound_path = "assets/sounds/"
         self.__load_sound(f"{sound_path}option_select.wav", "button_hover", 100)
+        self.__load_sound(f"{sound_path}ball_hit_brick.mp3",'brick_hit', 100)
         self.background_music = "background_menu"
 
     def __load_sound(self, filepath: str,
@@ -37,14 +38,14 @@ class SoundManager:
             sound.play()
             self.sounds[name]['last_played'] = current_time
 
-    def play_music(self, loop=True, start_time=49):
+    def play_music(self, loop=True, start_time=49, volume=0.7):
         """Plays background music using pygame.mixer.music"""
         music_path = f"assets/sounds/{self.background_music}"
         if "." not in self.background_music:
             music_path = f"assets/sounds/{self.background_music}.mp3"
         try:
             pygame.mixer.music.load(music_path)
-            pygame.mixer.music.set_volume(0.7)
+            pygame.mixer.music.set_volume(volume)
             pygame.mixer.music.play(-1 if loop else 0, start_time)
         except pygame.error as e:
             print(f"[ERROR] Failed to load background music: {e}")
