@@ -100,6 +100,13 @@ class GameScreen:
     def monitor_ball_dead(self):
         if not self.game_state.ball_sprite_group:
             self.level.reset_bat_ball()
+    
+    def monitor_level_clear(self):
+        if not self.game_state.tiles_group:
+            self.game_state.level += 1
+            self.game_state.ball_sprite_group.clear()
+            self.game_state.bat_sprite = None
+            self.level.load_level()
 
 def initialize_ui_handles(game_state: GameState):
     """
@@ -122,7 +129,9 @@ def handle_ui(game_state: GameState,
         case "game":
             handler = game_state.game_handle
             handler.monitor_ball_dead()
-            
+            handler.monitor_level_clear()
+
+
 def draw_ui(game_state: GameState):
     """Draws the screen containers and buttons, it will only draw current screen"""
     curr_screen_name = game_state.current_screen

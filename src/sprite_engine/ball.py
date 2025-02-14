@@ -12,8 +12,8 @@ class Velocity:
                  y: int, 
                  speed: int=BALL_SPEED, 
                  max_angle: int=MAX_ANGLE):
-        self.x = x * math.sin(max_angle)
-        self.y = y * math.sin(max_angle)
+        self.x = x
+        self.y = y
         self.speed = speed
         self.max_angle = max_angle
 
@@ -34,7 +34,7 @@ class Ball(pygame.sprite.Sprite):
         self.is_sticky = True
         self.current_time = pygame.time.get_ticks()
         self.sticky_time = 2000
-        self.velocity = Velocity(BALL_SPEED * 0.95, -BALL_SPEED)
+        self.velocity = Velocity(BALL_SPEED * 0.6, -BALL_SPEED)
         self.sw = self.game_state.screen_width
         self.sh = self.game_state.screen_height
         self.load_frame()
