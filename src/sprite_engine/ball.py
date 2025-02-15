@@ -64,7 +64,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect.y = bat_coords[1] - self.rect.h
 
     def bounds_check(self):
-        if (self.rect.x <= self.sw * 0.02) or (self.rect.x >= self.sw * 0.98):
+        if (self.rect.x <= self.sw * 0.01) or (self.rect.x >= self.sw * 0.98):
             self.velocity.x *= -1
         if (self.rect.y <= self.sh * 0.05):
             self.velocity.y *= -1
@@ -81,7 +81,6 @@ class Ball(pygame.sprite.Sprite):
         collided_bricks = pygame.sprite.spritecollide(self, self.game_state.tiles_group, dokill=False)
         if not collided_bricks:
             return  
-        
         brick = collided_bricks[0]
         brick.hits_to_break -= 1
         self.game_state.sound_manager.play_sound("brick_hit")

@@ -49,6 +49,7 @@ class GameRunner:
         update_and_draw(self._game_state.tiles_group)
         update_and_draw(self._game_state.bat_sprite, dt=dt)
         update_and_draw(self._game_state.ball_sprite_group, dt=dt)
+        update_and_draw(self._game_state.powers_group, dt=dt)
 
     def game_loop(self):
         """The main game loop."""

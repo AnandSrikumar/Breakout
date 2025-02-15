@@ -7,10 +7,12 @@ from src.sprite_engine.tiles import Tile
 from src.sprite_engine.player import Bat
 from src.sprite_engine.ball import Ball
 from src.utils.sound_utils import change_background_music
+from src.game_configs import POWERS
 
 class LevelManager:
     def __init__(self, game_state: GameState):
         self.game_state = game_state
+        self.powers_list = list(POWERS.keys())
 
     def load_json(self):
         """Loads level json from assets/level. Make sure that level jsons file names follow this pattern
@@ -47,6 +49,10 @@ class LevelManager:
             random_y = random.randrange(0, self.num_cols)
             self.powers.append((random_x, random_y))
 
+    def __load_power(self, idx1, idx2):
+        if (idx1, idx2) in self.powers:
+            return random.choice(self.powers_list)
+        
     def load_tiles(self):
         start_x = self.game_state.screen_width * self.tile_offsets['x']
         start_y = self.game_state.screen_height * self.tile_offsets['y']
@@ -55,9 +61,10 @@ class LevelManager:
         curr_x, curr_y = start_x, start_y
         for idx, row in enumerate(self.matrix):
             for idx2, cell in enumerate(row):
+                power = self.__load_power(idx, idx2)
                 coords = (curr_x, curr_y, w, h)
                 is_double_hit = (idx, idx2) in self.double_hit_tiles
-                tile = Tile(cell, coords, self.game_state, is_double_hit)
+                tile = Tile(cell, coords, self.game_state, is_double_hit, power)
                 self.game_state.tiles_group.add(tile)
                 curr_x += w + w*0.08
             curr_x = start_x
@@ -104,6 +111,7 @@ class LevelManager:
         change_background_music(self.background_music, 
                                 game_state=self.game_state, volume=0.5)
         self.game_state.screen_uis['game'].containers[0].set_background_image(self.background_image)
+        self.initialize_random_powers()
         self.load_tiles()
         self.load_bat()
         self.load_ball()

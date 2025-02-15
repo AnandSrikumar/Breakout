@@ -2,6 +2,7 @@ from typing import Any
 import pygame
 from src.game_configs import TILES_DICT
 from src.game_state_management import GameState
+from src.sprite_engine.powers import Power
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, 
@@ -40,9 +41,14 @@ class Tile(pygame.sprite.Sprite):
         self.rect.topleft = (self.coords[0], self.coords[1])
 
     def update(self):
-        if self.hits_to_break < 1:
-            self.kill()
-    
+        if self.hits_to_break >= 1:
+            return
+        if self.power:
+            coords = (self.rect.x, self.rect.y, self.rect.w * 0.6, self.rect.h * 0.6)
+            power_sprite = Power(self.game_state, coords, self.power)
+            self.game_state.powers_group.add(power_sprite)
+        self.kill()
+
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect)
         

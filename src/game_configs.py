@@ -25,6 +25,18 @@ NORMAL_BAT = ["assets/tiles/bats/normal1.png",
               "assets/tiles/bats/normal2.png",
               "assets/tiles/bats/normal3.png"]
 
+POWERS_PATH = "assets/tiles/powers/"
+POWERS = {
+    "big_bat": f"{POWERS_PATH}big_bat.png",
+    "small_bat": f"{POWERS_PATH}small_bat.png",
+    "bullets_bat": f"{POWERS_PATH}bullets_bat.png",
+    "slow_ball": f"{POWERS_PATH}slow_ball.png",
+    "fast_ball": f"{POWERS_PATH}fast_ball.png",
+    "magnet_ball": f"{POWERS_PATH}magnet_ball.png",
+    "fire_ball": f"{POWERS_PATH}fire_ball.png",
+    "multi_ball": f"{POWERS_PATH}multi_ball.png"
+}
+POWER_FALL_SPEED = 310
 BAT_MOVEMENT_SPEED = 660
 BALL_SPEED = 12
 MAX_ANGLE = math.radians(60)
