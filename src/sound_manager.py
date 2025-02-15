@@ -11,6 +11,7 @@ class SoundManager:
         sound_path = "assets/sounds/"
         self.__load_sound(f"{sound_path}option_select.wav", "button_hover", 100)
         self.__load_sound(f"{sound_path}ball_hit_brick.mp3",'brick_hit', 100)
+        self.__load_sound(f"{sound_path}bullet.mp3", 'bullet', 100)
         self.background_music = "background_menu"
 
     def __load_sound(self, filepath: str,

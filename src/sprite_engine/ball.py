@@ -19,8 +19,8 @@ class Velocity:
 
     def angle_modify(self, hit_pos: float):
         bounce_angle = hit_pos * self.max_angle
-        self.x = BALL_SPEED * math.sin(bounce_angle)
-        self.y = -BALL_SPEED * math.cos(bounce_angle)
+        self.x = self.speed * math.sin(bounce_angle)
+        self.y = -self.speed * math.cos(bounce_angle)
 
 
 class Ball(pygame.sprite.Sprite):
@@ -32,6 +32,7 @@ class Ball(pygame.sprite.Sprite):
         self.coords = coords
         self.is_fireball = False
         self.is_sticky = True
+        self.is_magnet = False
         self.current_time = pygame.time.get_ticks()
         self.sticky_time = 2000
         self.velocity = Velocity(BALL_SPEED * 0.6, -BALL_SPEED)
@@ -83,6 +84,8 @@ class Ball(pygame.sprite.Sprite):
             return  
         brick = collided_bricks[0]
         brick.hits_to_break -= 1
+        if self.is_fireball:
+            return
         self.game_state.sound_manager.play_sound("brick_hit")
         if self.prev_rect.right <= brick.rect.left:
             self.velocity.x *= -1
@@ -105,7 +108,7 @@ class Ball(pygame.sprite.Sprite):
         bat = self.game_state.bat_sprite
         bat_x, bat_y = bat.rect.x, bat.rect.y
         bat_w, bat_h = bat.rect.w, bat.rect.h
-        if self.is_sticky:
+        if self.is_sticky or self.is_magnet:
             self.sticky_movement((bat_x, bat_y, bat_w, bat_h))
             return
         self.prev_rect = self.rect.copy()
@@ -115,6 +118,7 @@ class Ball(pygame.sprite.Sprite):
     def key_bindings(self):
         if self.game_state.space_pressed:
             self.is_sticky = False
+            self.is_magnet = False
     
     def check_ball_dead(self):
         if self.rect.y >= self.game_state.screen_height:

@@ -36,6 +36,8 @@ POWERS = {
     "fire_ball": f"{POWERS_PATH}fire_ball.png",
     "multi_ball": f"{POWERS_PATH}multi_ball.png"
 }
+BULLETS = "assets/tiles/misc/bullet.png"
+BULLET_SPEED = 660
 POWER_FALL_SPEED = 310
 BAT_MOVEMENT_SPEED = 660
 BALL_SPEED = 12

@@ -105,6 +105,7 @@ class GameScreen:
         if not self.game_state.tiles_group:
             self.game_state.level += 1
             self.game_state.ball_sprite_group.empty()
+            self.game_state.bullets_group.empty()
             self.game_state.bat_sprite = None
             self.level.load_level()
 

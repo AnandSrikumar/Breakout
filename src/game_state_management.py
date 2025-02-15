@@ -33,6 +33,7 @@ class GameState:
         self.bat_sprite = None
         self.ball_sprite_group = Group()
         self.powers_group = Group()
+        self.bullets_group = Group()
         self.walls = {}
         self.level = 1
         self.space = pymunk.Space()

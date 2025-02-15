@@ -5,7 +5,7 @@
         ["dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green", "dark_green"],
         ["dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue", "dark_blue"]
     ],
-    "num_powers": 10,
+    "num_powers": 15,
     "num_cols": 10,
     "num_rows": 4,
     "double_hit_tiles": [],
