@@ -68,7 +68,7 @@ class Ball(pygame.sprite.Sprite):
         if (self.rect.x <= self.sw * 0.01) or (self.rect.x >= self.sw * 0.98):
             self.velocity.x *= -1
         if (self.rect.y <= self.sh * 0.05):
-            self.velocity.y *= -1
+            self.velocity.y = abs(self.velocity.y)
     
     def paddle_collision_check(self):
         bat_rect = self.game_state.bat_sprite.rect
