@@ -69,7 +69,7 @@ class Ball(pygame.sprite.Sprite):
             self.velocity.x = abs(self.velocity.x)
             self.game_state.sound_manager.play_sound("wall_hit")
         elif (self.rect.x >= self.sw * 0.98):
-            self.velocity.x *= -1
+            self.velocity.x *= -1 if self.velocity.x > 0 else 1
             self.game_state.sound_manager.play_sound("wall_hit")
         if (self.rect.y <= self.sh * 0.05):
             self.velocity.y = abs(self.velocity.y)
