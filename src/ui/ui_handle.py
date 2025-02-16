@@ -1,6 +1,9 @@
+from pygame.time import delay as gamedelay
+
 from typing import Any
 from src.game_state_management import GameState
 from src.ui.elements import Button
+from src.utils.draw_utils import draw_text
 from src.log_handle import get_logger
 from src.level_handler import LevelManager
 
@@ -99,7 +102,14 @@ class GameScreen:
     
     def monitor_ball_dead(self):
         if not self.game_state.ball_sprite_group:
+            self.game_state.sound_manager.play_sound("ball_dead")
+            gamedelay(2000)
             self.level.reset_bat_ball()
+    
+    def draw_level_number(self):
+        level = self.game_state.level
+        text = f"Level: {level}"
+        draw_text(text, (2, 4), self.game_state.screen)
     
     def monitor_level_clear(self):
         if not self.game_state.tiles_group:
@@ -129,6 +139,7 @@ def handle_ui(game_state: GameState,
             return
         case "game":
             handler = game_state.game_handle
+            handler.draw_level_number()
             handler.monitor_ball_dead()
             handler.monitor_level_clear()
 

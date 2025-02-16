@@ -9,7 +9,7 @@
     "num_cols": 10,
     "num_rows": 4,
     "double_hit_tiles": [],
-    "background_music":"crimson_fly.mp3",
+    "background_music":null,
     "background_image": "assets/backgrounds/space1.jpg",
     "tiles_offsets": {"x": 0.15, "y": 0.18},
     "tiles_dims": {"width": 0.07, "height": 0.045}

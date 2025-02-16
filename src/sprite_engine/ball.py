@@ -67,8 +67,10 @@ class Ball(pygame.sprite.Sprite):
     def bounds_check(self):
         if (self.rect.x <= self.sw * 0.01) or (self.rect.x >= self.sw * 0.98):
             self.velocity.x *= -1
+            self.game_state.sound_manager.play_sound("wall_hit")
         if (self.rect.y <= self.sh * 0.05):
             self.velocity.y = abs(self.velocity.y)
+            self.game_state.sound_manager.play_sound("wall_hit")
     
     def paddle_collision_check(self):
         bat_rect = self.game_state.bat_sprite.rect
@@ -76,6 +78,7 @@ class Ball(pygame.sprite.Sprite):
                 (self.rect.y >= self.game_state.screen_height):
             return
         hit_pos = (self.rect.centerx - bat_rect.centerx) / (bat_rect.w / 2)
+        self.game_state.sound_manager.play_sound("paddle_hit")
         self.velocity.angle_modify(hit_pos=hit_pos)
     
     def tiles_collision(self):
@@ -86,7 +89,7 @@ class Ball(pygame.sprite.Sprite):
         brick.hits_to_break -= 1
         if self.is_fireball:
             return
-        self.game_state.sound_manager.play_sound("brick_hit")
+        self.game_state.sound_manager.play_sound("bricks_hit")
         if self.prev_rect.right <= brick.rect.left:
             self.velocity.x *= -1
         elif self.prev_rect.left >= brick.rect.right:

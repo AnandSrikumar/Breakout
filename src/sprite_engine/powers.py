@@ -77,6 +77,7 @@ class Power(pygame.sprite.Sprite):
         if not (self.rect.colliderect(self.game_state.bat_sprite.rect)):
             return
         self.power_handle.assign_power(self.power_name)
+        self.game_state.sound_manager.play_sound("power_gain")
         self.kill()
 
     def update(self, dt):

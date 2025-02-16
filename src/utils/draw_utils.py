@@ -12,3 +12,9 @@ def set_rect_background(img: str, width: int, height: int):
         background_image, (width, height)
     )
     return background_image
+
+def draw_text(text: str, center: tuple, screen: pygame.Surface):
+    font = pygame.font.Font(None, 24)  # Use default font, size 50
+    text_surface = font.render(text, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(topleft=center)
+    screen.blit(text_surface, text_rect)
