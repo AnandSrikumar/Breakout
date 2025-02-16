@@ -7,11 +7,14 @@
         ["blue", "blue", "blue", "blue", "blue"],
         ["brown", "brown", "brown", "brown", "brown", "brown"],
         ["black", "black", "black", "black", "black", "black", "black"],
-        ["orange", "orange", "orange", "orange", "orange", "orange", "orange", "orange"]
+        ["orange", "orange", "orange", "orange", "orange", "orange", "orange", "orange"],
+        ["red", "red", "red", "red", "red", "red", "red", "red", "red"],
+        ["yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow"]
+        
     ],
     "num_powers": 10,
-    "num_cols": 8,
-    "num_rows": 8,
+    "num_cols": 10,
+    "num_rows": 10,
     "double_hit_tiles": [],
     "background_music":null,
     "background_image": "assets/backgrounds/space2.jpg",

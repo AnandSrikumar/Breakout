@@ -1,0 +1,22 @@
+{
+    "matrix": [
+        ["blue"],
+        ["purple", "purple"],
+        ["dark_green", "dark_green", "dark_green"],
+        ["dark_blue", "dark_blue", "dark_blue", "dark_blue"],
+        ["blue", "blue", "blue", "blue", "blue"],
+        ["dark_blue", "dark_blue", "dark_blue", "dark_blue"],
+        ["dark_green", "dark_green", "dark_green"],
+        ["purple", "purple"],
+        ["blue"],
+        ["yellow"]
+    ],
+    "num_powers": 5,
+    "num_cols": 4,
+    "num_rows": 10,
+    "double_hit_tiles": [],
+    "background_music":null,
+    "background_image": "assets/backgrounds/space1.jpg",
+    "tiles_offsets": {"x": 0.35, "y": 0.18},
+    "tiles_dims": {"width": 0.07, "height": 0.045}
+}

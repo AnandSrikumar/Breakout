@@ -65,7 +65,10 @@ class Ball(pygame.sprite.Sprite):
         self.rect.y = bat_coords[1] - self.rect.h
 
     def bounds_check(self):
-        if (self.rect.x <= self.sw * 0.01) or (self.rect.x >= self.sw * 0.98):
+        if (self.rect.x <= self.sw * 0.01):
+            self.velocity.x = abs(self.velocity.x)
+            self.game_state.sound_manager.play_sound("wall_hit")
+        elif (self.rect.x >= self.sw * 0.98):
             self.velocity.x *= -1
             self.game_state.sound_manager.play_sound("wall_hit")
         if (self.rect.y <= self.sh * 0.05):

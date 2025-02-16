@@ -61,11 +61,12 @@ class LevelManager:
         curr_x, curr_y = start_x, start_y
         for idx, row in enumerate(self.matrix):
             for idx2, cell in enumerate(row):
-                power = self.__load_power(idx, idx2)
-                coords = (curr_x, curr_y, w, h)
-                is_double_hit = (idx, idx2) in self.double_hit_tiles
-                tile = Tile(cell, coords, self.game_state, is_double_hit, power)
-                self.game_state.tiles_group.add(tile)
+                if cell:
+                    power = self.__load_power(idx, idx2)
+                    coords = (curr_x, curr_y, w, h)
+                    is_double_hit = (idx, idx2) in self.double_hit_tiles
+                    tile = Tile(cell, coords, self.game_state, is_double_hit, power)
+                    self.game_state.tiles_group.add(tile)
                 curr_x += w + w*0.08
             curr_x = start_x
             curr_y += h + h*0.08
