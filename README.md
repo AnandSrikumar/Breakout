@@ -8,6 +8,9 @@ A python clone to breakout
 
 `python main.py`
 
+## game demo
+https://www.youtube.com/watch?v=ktkUtq7FfwY
+
 ## Screenshots
 
 ![Breakout 17-02-2025 19_03_18](https://github.com/user-attachments/assets/c0c22ef5-2009-4bf6-95ad-4bb9f02728bc)
