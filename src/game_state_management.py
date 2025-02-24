@@ -27,7 +27,7 @@ class GameState:
         self._left_pressed: bool = False
         self._right_pressed: bool = False
         self.mouse_down = False
-        self.enter_pressed = False
+        self._enter_pressed = False
         self.space_pressed = False
         self.tiles_group = Group()
         self.bat_sprite = None
@@ -37,6 +37,17 @@ class GameState:
         self.walls = {}
         self.level = 1
         self.space = pymunk.Space()
+        self.is_paused = False
+
+    @property
+    def enter_pressed(self):
+        return self._enter_pressed
+    
+    @enter_pressed.setter
+    def enter_pressed(self, val: bool):
+        if val and self.current_screen == 'game':
+            self.is_paused = not self.is_paused
+        self._enter_pressed = val
 
     @property
     def screen(self) -> Surface:

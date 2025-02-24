@@ -111,6 +111,12 @@ class GameScreen:
         text = f"Level: {level}"
         draw_text(text, (2, 4), self.game_state.screen)
     
+    def draw_pause(self):
+        if self.game_state.is_paused:
+            draw_text("PAUSED", (self.game_state.screen_width//2,
+                                 self.game_state.screen_height//2), 
+                                 self.game_state.screen)
+    
     def monitor_level_clear(self):
         if not self.game_state.tiles_group:
             self.game_state.level += 1
@@ -142,7 +148,7 @@ def handle_ui(game_state: GameState,
             handler.draw_level_number()
             handler.monitor_ball_dead()
             handler.monitor_level_clear()
-
+            handler.draw_pause()
 
 def draw_ui(game_state: GameState):
     """Draws the screen containers and buttons, it will only draw current screen"""

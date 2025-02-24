@@ -43,7 +43,8 @@ class GameRunner:
         def update_and_draw(group, **kwargs):
             if group is None:
                 return
-            group.update(**kwargs)
+            if not self._game_state.is_paused:
+                group.update(**kwargs)
             group.draw(self._screen)
         
         update_and_draw(self._game_state.tiles_group)
